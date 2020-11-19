@@ -1,32 +1,52 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Navigation />
+    <transition>
+      <router-view id="view" />
+    </transition>
+    <Footer />
   </div>
 </template>
 
+<script>
+import Navigation from "./views/Menu";
+import Footer from "./views/Footer";
+
+export default {
+  components: {
+    Navigation,
+    Footer
+  },
+  methods: {},
+  watch: {
+    $route(to, from) {
+      const toDepth = to.path.split("/").length;
+      const fromDepth = from.path.split("/").length;
+      this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+      document.title = this.$route.meta.title;
+    }
+  },
+  created() {
+    document.title = this.$route.meta.title;
+  }
+};
+</script>
+
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
+  min-width: 90vw;
+  min-height: 100vh;
+  background-color: #c9caca;
+  box-sizing: 0;
+  outline: none;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#view {
+  min-height: 80vh;
 }
 </style>
