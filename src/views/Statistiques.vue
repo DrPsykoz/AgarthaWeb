@@ -10,12 +10,15 @@
           <span>STATISTIQUES</span> !
         </h3>
       </div>
-      <a href="#boutique-section">
+      <a href="#classement">
         <img
           class="arrow"
           src="https://img.icons8.com/android/24/000000/expand-arrow.png"
         />
       </a>
+    </section>
+    <section id="classement">
+      <h1>Les statistiques arrivent bientôt !</h1>
     </section>
   </div>
 </template>
@@ -48,6 +51,7 @@ export default {};
           transparent
         ),
         url("../assets/statistiques/background.jpg");
+      background-size: cover;
     }
 
     .content {
@@ -93,6 +97,19 @@ export default {};
       transform: scale(1.5);
 
       animation: up-and-down 1s infinite;
+    }
+  }
+
+  #classement {
+    min-height: calc(100vh);
+    background-color: #2f3640;
+    display: flex;
+    flex-direction: row;
+    padding: 200px 0;
+    color: white;
+
+    h1 {
+      margin: auto;
     }
   }
 }

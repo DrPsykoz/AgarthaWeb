@@ -20,7 +20,7 @@
         {{ button_ip }}
       </button>
       <div class="flex flex-column nav-ip-info">
-        <h1>PLAY.DRPSYKOZ.FR</h1>
+        <h1>PLAY.AGARTHAUHC.FR</h1>
         <h3>Serveur disponible de la 1.8 a la 1.15</h3>
       </div>
     </div>
@@ -53,13 +53,13 @@ export default {
     return {
       button_ip: "Copier l'ip",
       nav_class: "notsticky",
-      smallHidden: true
+      smallHidden: true,
     };
   },
   methods: {
     copyToClipboard(str) {
       const el = document.createElement("textarea");
-      el.addEventListener("focusin", e => e.stopPropagation());
+      el.addEventListener("focusin", (e) => e.stopPropagation());
       el.value = str;
       document.body.appendChild(el);
       el.select();
@@ -69,7 +69,7 @@ export default {
       setTimeout(() => {
         this.button_ip = "Copier l'ip";
       }, 1500);
-    }
+    },
   },
   mounted() {
     window.document.onscroll = () => {
@@ -80,7 +80,7 @@ export default {
         this.nav_class = "notsticky";
       }
     };
-  }
+  },
 };
 </script>
 
@@ -197,6 +197,7 @@ export default {
       h3 {
         font-size: 17px;
         font-weight: 100;
+        text-align: right;
       }
     }
   }

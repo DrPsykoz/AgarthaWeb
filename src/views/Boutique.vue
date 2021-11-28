@@ -12,11 +12,16 @@
         </h3>
       </div>
       <a href="#boutique-section">
-        <img class="arrow" src="https://img.icons8.com/android/24/000000/expand-arrow.png" />
+        <img
+          class="arrow"
+          src="https://img.icons8.com/android/24/000000/expand-arrow.png"
+        />
       </a>
     </section>
     <section class="boutique-section" id="boutique-section">
-      <div :class="username === null ? 'user-selection' : 'user-selection hide'">
+      <div
+        :class="username === null ? 'user-selection' : 'user-selection hide'"
+      >
         <h1>Pseudo Minecraft:</h1>
         <input type="text" v-model="input_username" />
         <a href="#boutique-section">
@@ -38,12 +43,14 @@
               :key="categorie.title"
               :class="selected_categorie === categorie.title ? 'selected' : ''"
               @click="selected_categorie = categorie.title"
-            >{{ categorie.title }}</button>
+            >
+              {{ categorie.title }}
+            </button>
           </div>
           <div class="boutique-items">
             <boutiqueItem
               v-for="item in products.filter(
-                x => x.categorie === selected_categorie
+                (x) => x.categorie === selected_categorie
               )"
               :key="item.title"
               :item="item"
@@ -67,7 +74,10 @@
           >
             <button @click="selected_product = null">Annuler</button>
             <h1>Résumé de la commande:</h1>
-            <div class="boutique-basket-content-item" v-if="selected_product != null">
+            <div
+              class="boutique-basket-content-item"
+              v-if="selected_product != null"
+            >
               <span>{{ selected_product.categorie }}</span>
               <p>{{ selected_product.title }}</p>
               <p>{{ selected_product.price }}€</p>
@@ -79,7 +89,10 @@
             <div v-if="paypal.success" class="boutique-basket-confirm-success">
               <h1>Achat effectué !</h1>
               <h3>Connecte toi sur le serveur pour recevoir ton achat !</h3>
-              <div class="boutique-basket-content-item" v-if="selected_product != null">
+              <div
+                class="boutique-basket-content-item"
+                v-if="selected_product != null"
+              >
                 <span>{{ selected_product.categorie }}</span>
                 <p>{{ selected_product.title }}</p>
                 <p>{{ selected_product.price }}€</p>
@@ -88,7 +101,10 @@
             <div v-else class="boutique-basket-confirm-failed">
               <h1>Achat non effectué !</h1>
               <h3>Il y a eu un probléme lors du paiement merci de reesayer.</h3>
-              <div class="boutique-basket-content-item" v-if="selected_product != null">
+              <div
+                class="boutique-basket-content-item"
+                v-if="selected_product != null"
+              >
                 <span>{{ selected_product.categorie }}</span>
                 <p>{{ selected_product.title }}</p>
                 <p>{{ selected_product.price }}€</p>
@@ -108,14 +124,14 @@ import boutiqueItem from "../components/boutique/boutiqueItem";
 
 export default {
   components: {
-    boutiqueItem
+    boutiqueItem,
   },
   data() {
     return {
       paypal: {
         loaded: false,
         paid: false,
-        success: false
+        success: false,
       },
 
       input_username: "",
@@ -130,7 +146,7 @@ export default {
           description: "Grade VIP valable a vie",
           img: require("../assets/boutique/vip.png"),
           key: "rank_vip",
-          amount: 1
+          amount: 1,
         },
         {
           title: "Reptilien",
@@ -139,7 +155,7 @@ export default {
           description: "Grade Reptilien valable a vie",
           img: require("../assets/boutique/reptilien.png"),
           key: "rank_reptilien",
-          amount: 1
+          amount: 1,
         },
         {
           title: "Pack de 250 coins",
@@ -148,7 +164,7 @@ export default {
           description: "Un petit tas de coins",
           img: require("../assets/boutique/coins-tiny.png"),
           key: "coins",
-          amount: 250
+          amount: 250,
         },
         {
           title: "Pack de 500 coins",
@@ -158,7 +174,7 @@ export default {
           description: "Un tas de coins",
           img: require("../assets/boutique/coins-small.png"),
           key: "coins",
-          amount: 550
+          amount: 550,
         },
         {
           title: "Pack de 1000 coins",
@@ -168,7 +184,7 @@ export default {
           description: "Un gros tas de coins",
           img: require("../assets/boutique/coins-medium.jpg"),
           key: "coins",
-          amount: 1200
+          amount: 1200,
         },
         {
           title: "Pack de 2500 coins",
@@ -178,7 +194,7 @@ export default {
           description: "Un coffre de coins",
           img: require("../assets/boutique/coins-large.png"),
           key: "coins",
-          amount: 3100
+          amount: 3100,
         },
         {
           title: "Pack de 5000 coins",
@@ -188,15 +204,15 @@ export default {
           description: "Deux coffres de coins",
           img: require("../assets/boutique/coins-extreme.png"),
           key: "coins",
-          amount: 7500
-        }
+          amount: 7500,
+        },
       ],
 
       selected_product: null,
-      selected_categorie: "Grades"
+      selected_categorie: "Grades",
     };
   },
-  mounted: function() {
+  mounted: function () {
     const script = document.createElement("script");
 
     let inDev = true;
@@ -214,7 +230,7 @@ export default {
     document.body.appendChild(script);
   },
   methods: {
-    setLoaded: function() {
+    setLoaded: function () {
       this.paypal.loaded = true;
       window.paypal
         .Buttons({
@@ -225,10 +241,10 @@ export default {
                   description: this.selected_product.description,
                   amount: {
                     currency_code: "EUR",
-                    value: this.selected_product.price
-                  }
-                }
-              ]
+                    value: this.selected_product.price,
+                  },
+                },
+              ],
             });
           },
           onApprove: async (data, actions) => {
@@ -238,22 +254,22 @@ export default {
             console.log(order);
             this.createSale();
           },
-          onError: err => {
+          onError: (err) => {
             this.paypal.paid = true;
             this.paypal.success = false;
             console.log(err);
-          }
+          },
         })
         .render(this.$refs.paypal);
     },
-    createSale: function() {
+    createSale: function () {
       Api().post("/webitems", {
         username: this.username,
         key: this.selected_product.key,
-        amount: this.selected_product.amount
+        amount: this.selected_product.amount,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -285,10 +301,11 @@ export default {
           transparent
         ),
         url("../assets/boutique/background.jpg");
+      background-size: cover;
     }
 
     .content {
-      width: 550px;
+      max-width: 550px;
       margin: 35vh auto 100px auto;
       justify-content: space-around;
 
@@ -351,6 +368,7 @@ export default {
       display: flex;
       flex-direction: column;
       text-align: center;
+      max-width: 600px;
 
       h1 {
         text-transform: uppercase;
@@ -398,6 +416,8 @@ export default {
       justify-content: flex-start;
       background-color: rgba($color: #000000, $alpha: 0.05);
       margin-bottom: 20px;
+      max-width: 800px;
+      justify-content: space-between;
 
       h3 {
         font-weight: 100;
@@ -427,6 +447,8 @@ export default {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      max-width: 600px;
+      margin: auto;
 
       button {
         border-radius: 0;
@@ -483,6 +505,8 @@ export default {
     }
 
     .boutique-basket {
+      max-width: 800px;
+      margin: auto;
       .boutique-basket-content {
         display: flex;
         flex-direction: column;

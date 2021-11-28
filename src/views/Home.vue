@@ -18,7 +18,8 @@
     <section class="discord">
       <h1>Rejoignez notre Discord</h1>
       <h3>
-        Pour être au courant des nouveautés dès leur sortie, trouver des amis avec qui jouer ou encore participer à des giveaways !
+        Pour être au courant des nouveautés dès leur sortie, trouver des amis
+        avec qui jouer ou encore participer à des giveaways !
       </h3>
       <button @click="openDiscord">Rejoindre le discord</button>
     </section>
@@ -30,7 +31,7 @@ export default {
   name: "Home",
   data() {
     return {
-      button_ip: "Copier l'ip"
+      button_ip: "Copier l'ip",
     };
   },
   methods: {
@@ -42,8 +43,8 @@ export default {
       setTimeout(() => {
         this.button_ip = "Copier l'ip";
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -71,6 +72,7 @@ export default {
           transparent
         ),
         url("../assets/accueil/cave.jpg");
+      background-size: cover;
     }
 
     .content {

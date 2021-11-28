@@ -7,9 +7,11 @@
         </div>
         <div class="texte">
           <h1>AGARTHA</h1>
-          <h2>play.drpsykoz.fr</h2>
+          <h2>play.agarthauhc.fr</h2>
           <h4>Connectez vous de la 1.8 à la 1.15 !</h4>
-          <button @click="copyToClipboard('play.drpsykoz.fr')">{{ button_ip }}</button>
+          <button @click="copyToClipboard('play.agarthauhc.fr')">
+            {{ button_ip }}
+          </button>
         </div>
       </div>
       <div class="liens-utiles">
@@ -35,13 +37,13 @@
 export default {
   data() {
     return {
-      button_ip: "Copier l'ip"
+      button_ip: "Copier l'ip",
     };
   },
   methods: {
     copyToClipboard(str) {
       const el = document.createElement("textarea");
-      el.addEventListener("focusin", e => e.stopPropagation());
+      el.addEventListener("focusin", (e) => e.stopPropagation());
       el.value = str;
       document.body.appendChild(el);
       el.select();
@@ -51,8 +53,8 @@ export default {
       setTimeout(() => {
         this.button_ip = "Copier l'ip";
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>
 
